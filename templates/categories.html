@@ -1,0 +1,28 @@
+{% extends "main.html" %}
+{% block content %}
+<body>
+<div class = 'flash'>
+		      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="alert alert-dark" role="alert">  
+        	<ul>
+        		{% for message in messages %}
+            	<li> <strong> {{ message }} </strong> </li>
+        		{% endfor %}
+        	</ul>
+    	</div>
+       {% endif %}
+    {% endwith %}
+
+</div>
+<ul class="nav flex-column">
+	{% for categories in categories %}
+	<li class="btn-outline-secondary">
+		<a class="nav-link btn-outline-secondary" href = "{{url_for('showRecipes', cat_id = categories.id)}}">
+		<h3 class="display-4 text-center">{{categories.name}}
+		</a>
+	</li>
+	{% endfor %}
+</ul>
+{% endblock %}
+

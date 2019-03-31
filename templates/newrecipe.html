@@ -1,0 +1,55 @@
+{% extends "main.html" %}
+{% block content %}
+<div class="page-header">
+	<h2 class="display-4 text-center">Add a new recipe.</h2>
+</div>
+
+<div class = 'flash'>
+		      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+          
+        <ul>
+        {% for message in messages %}
+        <div class="alert alert-dark" role="alert">
+            <li> <strong> {{ message }} </strong> </li>
+        </div>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+
+</div>
+
+<div class = "jumbotron">
+			<form method = post>
+				<div>
+					<h5 class="display-5">Recipe Name:</h5>
+					<div class="input-group input-group-lg">
+					<input type ="text" class="form-control" maxlength="100" name="name" placeholder="Name of the recipe">
+					</div><br>
+
+					<h5 class="display-5">Ingredients:</h5>
+					<div class="input-group input-group-lg">
+					<textarea class="form-control" rows="5" cols="150" name="ingredients" placeholder="Ingredients for the recipe"></textarea>
+					</div><br>
+
+					<h5 class="display-5">Directions:</h5>
+					<div class="input-group input-group-lg">
+					<textarea class="form-control" rows="5" cols="150" name="directions" placeholder="Directions for the recipe"></textarea>
+					</div><br>
+
+					<h5 class="display-5">Picture URI:</h5>
+					<div class="input-group input-group-lg">
+					<input type ="text" class="form-control" maxlength="100" name="picture" placeholder="URI for picture of the recipe">
+					</div><br>
+
+					<div class="input-group input-group-lg">
+					<span class="input-group-btn">
+						<input class="btn btn-outline-secondary btn-lg" type="submit" value = "Submit">
+					</span>
+					</div>
+				</div>
+			</form>
+			<a href="{{url_for('showRecipes', cat_id = cat_id)}}"><button class="btn btn btn-outline-secondary btn-lg">Cancel</button></a>
+	</div>				
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends "main.html" %}
+{% block content %}
+<div class="page-header">
+	<h2 class="display-4 text-center">Edit existing recipe.</h2>
+</div>
+
+<div class = "jumbotron">
+	<form action="#" method = "post">
+		<div>
+			<h5 class="display-5">Recipe Name:</h5>
+			<div class="input-group input-group-lg">
+			<input type ="text" class="form-control" maxlength="100" name="name" value="{{item.name }}">
+			</div><br>
+
+			<h5 class="display-5">Ingredients:</h5>
+			<div class="input-group input-group-lg">
+			<textarea class="form-control" rows="5" cols="150" name="ingredients">{{item.ingredients}}</textarea>
+			</div><br>
+
+			<h5 class="display-5">Directions:</h5>
+			<div class="input-group input-group-lg">
+			<textarea class="form-control" rows="5" cols="150" name="directions">{{item.directions}}</textarea>
+			</div><br>
+
+			<h5 class="display-5">Picture URI:</h5>
+			<div class="input-group input-group-lg">
+			<input type ="text" class="form-control" maxlength="100" name="picture" value="{{item.picture}}">
+			</div><br>
+
+			<label for="category">Course:</label>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="category" id="1" value="1" {% if item.cat_id == '1'%}checked{%endif%}>Appetizers
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="category" id="2" value="2" {% if item.cat_id == '2'%}checked{%endif%}>Salads
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="category" id="3" value="3" {% if item.cat_id == '3'%}checked{%endif%}>Side Dishes
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="category" id="4" value="4" {% if item.cat_id == '4'%}checked{%endif%}>Meat/Poultry
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="category" id="5" value="5" {% if item.cat_id == '5'%}checked{%endif%}>Dairy
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="category" id="6" value="6" {% if item.cat_id == '6'%}checked{%endif%}>Desserts
+					  </label>
+					</div><br>
+					
+		<button type="submit" class="btn btn-outline-secondary btn-lg"> Save </button>
+		</form>
+	</div>
+		<a href="{{url_for('showRecipes', cat_id = cat_id)}}"><button class="btn btn btn-outline-secondary btn-lg">Cancel</button></a>
+</div>	
+{% endblock %}

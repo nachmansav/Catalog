@@ -1,0 +1,40 @@
+{% extends "main.html" %}
+{% block content %}
+
+<div class = 'flash'>
+		      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+          
+        <ul>
+        {% for message in messages %}
+        <div class="alert alert-dark" role="alert">
+            <li> {{ message }} </li>
+        </div>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+</div>
+
+<div class="jumbotron">
+	<div class="row top-menu">
+		<a class="btn btn-outline-secondary btn-sm mb-5 mx-auto d-block" href="{{url_for('newRecipe', cat_id = category.id )}}"><h3>Create New Recipe</h3></a>
+	</div>
+
+	<div class="row">
+
+	{% for item in items %}
+		<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+			<div class="thumbnail">
+				<a class="text-secondary" href = "{{url_for('showRecipe', cat_id = category.id, rec_id = item.id)}}"><img width="300px" height="300px" style=" object-fit: cover;" src="{{item.picture}}">
+				<div class="caption">
+				<h3>{{item.name}}</h3>
+				</div>
+				</a>
+			</div>
+		</div>
+	{% endfor %}
+	</div>
+</div>
+{% endblock %}
+
