@@ -1,14 +1,20 @@
-from sqlalchemy import Column,Integer,String, ForeignKey
+#!/usr/bin/env python3
+
+from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
 from sqlalchemy import create_engine
-import random, string
-from itsdangerous import(TimedJSONWebSignatureSerializer as Serializer, BadSignature, SignatureExpired)
+import random
+import string
+from itsdangerous import (TimedJSONWebSignatureSerializer
+                          as Serializer, BadSignature, SignatureExpired)
 
 Base = declarative_base()
 
-#You will use this secret key to create and verify your tokens
-secret_key = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in xrange(32))
+# Use this secret key to create and verify tokens
+secret_key = ''.join(random.choice(
+    string.ascii_uppercase + string.digits) for x in xrange(32))
+
 
 class User(Base):
     __tablename__ = 'user'
@@ -18,22 +24,20 @@ class User(Base):
     email = Column(String, index=True)
     recipes = relationship('Recipe', backref='creator')
 
-
-    def generate_auth_token(self, expiration=600):
-        s = Serializer(secret_key, expires_in = expiration)
+    def generate_auth_token(self, expiration=6000):
+        s = Serializer(secret_key, expires_in=expiration)
         return s.dumps({'id': self.id})
-    
-    
+
     @staticmethod
     def verify_auth_token(token):
-        s= Serializer(secret_key)
+        s = Serializer(secret_key)
         try:
             data = s.loads(token)
         except SignatureExpired:
-            #valid Token, but expired
+            # valid Token, but expired
             return None
         except BadSignature:
-            #Invalid Token
+            # Invalid Token
             return None
         user_id = data['id']
         return user_id
@@ -49,11 +53,10 @@ class Category(Base):
     def serialize(self):
         """Return object data in easily serializeable format"""
         return {
-        'id' : self.id,
-        'name' : self.name,
-        'picture' : self.picture
-        }
-    
+            'id': self.id,
+            'name': self.name,
+            'picture': self.picture
+            }
 
 
 class Recipe(Base):
@@ -69,16 +72,15 @@ class Recipe(Base):
     def serialize(self):
         """Return object data in easily serializeable format"""
         return {
-        'picture' : self.picture,
-        'creator' : self.creator.username,
-        'creator_picture': self.creator.picture,
-        'name' : self.name,
-        'cat_id' : self.cat_id,
-        'ingredients' : self.ingredients,
-        'directions' : self.directions,
-         }
+            'picture': self.picture,
+            'creator': self.creator.username,
+            'creator_picture': self.creator.picture,
+            'name': self.name,
+            'cat_id': self.cat_id,
+            'ingredients': self.ingredients,
+            'directions': self.directions,
+            }
+
 
 engine = create_engine('sqlite:///recipes.db')
- 
-
 Base.metadata.create_all(engine)
