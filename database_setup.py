@@ -16,6 +16,7 @@ secret_key = ''.join(random.choice(
     string.ascii_uppercase + string.digits) for x in xrange(32))
 
 
+# The Username table.
 class User(Base):
     __tablename__ = 'user'
     id = Column(Integer, primary_key=True)
@@ -43,6 +44,7 @@ class User(Base):
         return user_id
 
 
+# The Category table.
 class Category(Base):
     __tablename__ = 'category'
     id = Column(Integer, primary_key=True)
@@ -59,6 +61,7 @@ class Category(Base):
             }
 
 
+# The recipe table.
 class Recipe(Base):
     __tablename__ = 'recipe'
     id = Column(Integer, primary_key=True)

@@ -60,8 +60,8 @@ def gconnect():
         return response
     # Check that the access token is valid.
     access_token = credentials.access_token
-    url = ('https://www.googleapis.com/oauth2/v1/tokeninfo?'
-           'access_token=%s' % access_token)
+    url = ('https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=%s'
+           % access_token)
     h = httplib2.Http()
     result = json.loads(h.request(url, 'GET')[1])
     # If there was an error in the access token info, abort.
@@ -181,6 +181,7 @@ def gdisconnect():
         return response
 
 
+# Check to see if the user is logged in.
 def loggedIn():
     if 'username' not in login_session:
         return False
