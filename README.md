@@ -5,6 +5,8 @@ This project is a dynamic, RESTful web application where users can share recipes
 It features Google's OAuth 2.0 authentication so that users can login and out. 
 Only users that are logged in can create a new recipe. Logged-in users are only able to edit or delete the recipes that they created. There are also public versions of the main pages so that a user that is not logged-in can still view all of the recipes present. The application stores and displays each recipe according to the category that it was created with.
 ## Instructions for running the code:
+Update: the code is running here: http://www.52.59.212.112.xip.io/
+The following are the original running instructions:
 1. Download and install [Vagrant](https://www.vagrantup.com/) and [VirtualBox](https://www.virtualbox.org/).
 2. Download the following Udacity [folder](https://d17h27t6h515a5.cloudfront.net/topher/2017/August/59822701_fsnd-virtual-machine/fsnd-virtual-machine.zip) which contains preconfigured vagrant settings.
 3. Clone this repository.
